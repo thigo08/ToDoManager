@@ -1,0 +1,8 @@
+{
+  "name": "ToDoManager",
+  "app_id": "d76e68f2",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
