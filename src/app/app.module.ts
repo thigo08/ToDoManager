@@ -12,13 +12,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { ToDoListPage } from '../pages/to-do-list/to-do-list';
 import { DoneListPage } from '../pages/done-list/done-list';
+import { TaskPage } from '../pages/task/task';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     ToDoListPage,
-    DoneListPage
+    DoneListPage,
+    TaskPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { DoneListPage } from '../pages/done-list/done-list';
     MyApp,
     LoginPage,
     ToDoListPage,
-    DoneListPage
+    DoneListPage,
+    TaskPage
   ],
   providers: [
     StatusBar,

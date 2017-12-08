@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { TaskPage } from '../task/task';
+
 /**
  * Generated class for the DoneListPage page.
  *
@@ -19,6 +21,12 @@ export class DoneListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DoneListPage');
+  }
+
+  goToTaskPage() {
+    //push another page onto the history stack
+    //causing the nav controller to animate the new page in
+    this.navCtrl.push(TaskPage);
   }
 
 }
