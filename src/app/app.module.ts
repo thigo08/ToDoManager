@@ -10,11 +10,15 @@ import { LoginPage } from '../pages/login/login';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { ToDoListPage } from '../pages/to-do-list/to-do-list';
+import { DoneListPage } from '../pages/done-list/done-list';
 
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage
+    LoginPage,
+    ToDoListPage,
+    DoneListPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { environment } from '../environments/environment';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage
+    LoginPage,
+    ToDoListPage,
+    DoneListPage
   ],
   providers: [
     StatusBar,
