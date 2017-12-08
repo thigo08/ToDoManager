@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { Task } from "../../shared/models/task";
 
 /**
  * Generated class for the TaskPage page.
@@ -9,16 +10,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  */
 
 @Component({
-  selector: 'page-task',
-  templateUrl: 'task.html',
+  selector: "page-task",
+  templateUrl: "task.html"
 })
 export class TaskPage {
+  task = { priority: false, isDone: false } as Task;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TaskPage');
+    console.log("ionViewDidLoad TaskPage");
   }
 
+  save() {
+    // Implementar serviço para salvar
+    console.log(this.task);
+  }
 }

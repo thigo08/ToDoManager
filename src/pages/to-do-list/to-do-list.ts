@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { TaskPage } from '../task/task';
 
 /**
@@ -15,7 +15,7 @@ import { TaskPage } from '../task/task';
 })
 export class ToDoListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -25,7 +25,8 @@ export class ToDoListPage {
   goToTaskPage() {
     //push another page onto the history stack
     //causing the nav controller to animate the new page in
-    this.navCtrl.push(TaskPage);
+    //this.navCtrl.push(TaskPage);
+    this.app.getRootNav().push(TaskPage);
   }
 
 }
