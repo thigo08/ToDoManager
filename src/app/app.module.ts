@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { ToDoListPage } from '../pages/to-do-list/to-do-list';
 import { DoneListPage } from '../pages/done-list/done-list';
 import { TaskPage } from '../pages/task/task';
+import { FirebaseApiProvider } from '../providers/firebase-api/firebase-api';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TaskPage } from '../pages/task/task';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseApiProvider
   ]
 })
 export class AppModule {}

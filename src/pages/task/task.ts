@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { Task } from "../../shared/models/task";
+import { FirebaseApiProvider } from "../../providers/firebase-api/firebase-api";
 
 /**
  * Generated class for the TaskPage page.
@@ -14,9 +15,19 @@ import { Task } from "../../shared/models/task";
   templateUrl: "task.html"
 })
 export class TaskPage {
-  task = { priority: false, isDone: false } as Task;
+  task = {
+    key: "",
+    title: "",
+    resume: "",
+    priority: true,
+    isDone: false
+  } as Task;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    private firebase: FirebaseApiProvider,
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad TaskPage");
@@ -25,5 +36,13 @@ export class TaskPage {
   save() {
     // Implementar serviço para salvar
     console.log(this.task);
+    this.firebase
+      .writeTaskOnFirebase(this.task)
+      .then(success => {
+        console.log(success);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
