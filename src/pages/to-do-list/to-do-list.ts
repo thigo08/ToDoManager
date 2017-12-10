@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
 import { TaskPage } from '../task/task';
+import { FirebaseApiProvider } from '../../providers/firebase-api/firebase-api';
+import { Task } from '../../shared/models/task';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ToDoListPage page.
@@ -14,8 +17,23 @@ import { TaskPage } from '../task/task';
   templateUrl: 'to-do-list.html',
 })
 export class ToDoListPage {
+  
+  tasksList: Observable<Task[]>;
 
-  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private app: App, 
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private fireBaseApi: FirebaseApiProvider, 
+  ) {
+  this.tasksList = fireBaseApi
+    .readTaskFromFirebase(false)
+    .snapshotChanges()
+    .map(changes => {
+      return changes.map(c => ({
+        key: c.payload.key, 
+        ...c.payload.val(),
+      }));
+    });
   }
 
   ionViewDidLoad() {

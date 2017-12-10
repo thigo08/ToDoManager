@@ -1,7 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from "firebase";
+import { Task } from "../../shared/models/task";
+import { database } from "firebase/app";
 
 /*
   Generated class for the FirebaseApiProvider provider.
@@ -12,9 +15,15 @@ import firebase from "firebase";
 @Injectable()
 export class FirebaseApiProvider {
   firebaseUser;
+  private tasksListRef;
+  private afDatabase: AngularFireDatabase;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.firebaseUser = this.afAuth.auth.currentUser;
+    this.afDatabase = db;
+    if (this.firebaseUser){
+      this.tasksListRef = this.firebaseUser.uid + '/tasks';
+    }
   }
 
   writeTaskOnFirebase(data) {
@@ -31,7 +40,10 @@ export class FirebaseApiProvider {
       .update(data);
   }
 
-  readTaskFromFirebase(listener) {
-    // Implementar listar Tarefas
+  readTaskFromFirebase(isDone: boolean, isHighPriority?: boolean) {
+    return this.afDatabase.list<Task>(this.tasksListRef,
+    ref => {
+      return ref.orderByChild('isDone').equalTo(isDone);
+    });
   }
-}
+} 

@@ -14,6 +14,7 @@ import { ToDoListPage } from '../pages/to-do-list/to-do-list';
 import { DoneListPage } from '../pages/done-list/done-list';
 import { TaskPage } from '../pages/task/task';
 import { FirebaseApiProvider } from '../providers/firebase-api/firebase-api';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FirebaseApiProvider } from '../providers/firebase-api/firebase-api';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule, 
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

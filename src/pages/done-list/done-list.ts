@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
 
 import { TaskPage } from '../task/task';
+import { FirebaseApiProvider } from "../../providers/firebase-api/firebase-api";
+import { Observable } from 'rxjs/Observable';
+import { Task } from './../../shared/models/task';
 
 /**
  * Generated class for the DoneListPage page.
@@ -16,7 +19,22 @@ import { TaskPage } from '../task/task';
 })
 export class DoneListPage {
 
-  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams) {
+  tasksList: Observable<Task[]>;
+
+  constructor(private app: App, 
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private fireBaseApi: FirebaseApiProvider, 
+    ) {
+    this.tasksList = fireBaseApi
+      .readTaskFromFirebase(true)
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key, 
+          ...c.payload.val(),
+        }));
+      });
   }
 
   ionViewDidLoad() {
@@ -29,5 +47,5 @@ export class DoneListPage {
     //this.navCtrl.push(TaskPage);
     this.app.getRootNav().push(TaskPage);
   }
-
+  
 }

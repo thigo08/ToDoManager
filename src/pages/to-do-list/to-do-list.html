@@ -14,7 +14,14 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let task of tasksList | async">
+    <h2>{{task.title}}</h2>
+    <p> 
+      {{task.resume}}
+    </p>
+    </ion-item>
+  </ion-list>
   <ion-fab right bottom>
     <button ion-fab (click)="goToTaskPage()">
       <ion-icon name="add"></ion-icon>

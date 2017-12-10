@@ -40,6 +40,7 @@ export class TaskPage {
       .writeTaskOnFirebase(this.task)
       .then(success => {
         console.log(success);
+        this.navCtrl.setRoot("TabsPage");
       })
       .catch(error => {
         console.log(error);
