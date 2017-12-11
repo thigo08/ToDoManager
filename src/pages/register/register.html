@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Login
+      Register
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
 
+<ion-content padding>
   <form #form="ngForm" novalidate>
     <ion-list>
 
@@ -33,15 +33,9 @@
 
     </ion-list>
 
-    <button ion-button block color="primary" [disabled]="!form.form.valid" (click)="login()">
-      Sign In
+    <button ion-button block color="primary" [disabled]="!form.form.valid" (click)="createUser()">
+      Register User
     </button>
   </form>
-
-  <p text-center>Not a member? Let's</p>
-
-  <button ion-button block clear (click)="register()">
-    Register
-  </button>
 
 </ion-content>
