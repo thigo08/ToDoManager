@@ -16,10 +16,13 @@ import { Task } from './../../shared/models/task';
 @Component({
   selector: 'page-done-list',
   templateUrl: 'done-list.html',
+  
 })
 export class DoneListPage {
 
   tasksList: Observable<Task[]>;
+  lowPriorityList: Observable<Task[]>;
+  highPriorityList: Observable<Task[]>;
 
   constructor(private app: App, 
     public navCtrl: NavController, 
@@ -35,6 +38,17 @@ export class DoneListPage {
           ...c.payload.val(),
         }));
       });
+    this.lowPriorityList = this.filterTask(false);
+    this.highPriorityList = this.filterTask(true);
+  }
+
+  filterTask(isHighPriority: boolean){
+    var list = this.tasksList.map((tasks) => {
+        return tasks.filter((item) => {
+            return item.priority == isHighPriority;
+        });
+    });
+    return list;
   }
 
   ionViewDidLoad() {

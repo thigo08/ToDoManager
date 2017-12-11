@@ -14,14 +14,30 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let task of tasksList | async">
+  <ion-list *ngIf="(highPriorityList | async)?.length > 0">
+    <ion-list-header>
+      <h1>High priority</h1>
+    </ion-list-header>
+    <ion-item *ngFor="let task of highPriorityList | async">
     <h2>{{task.title}}</h2>
     <p> 
       {{task.resume}}
     </p>
     </ion-item>
   </ion-list>
+
+  <ion-list *ngIf="(lowPriorityList | async)?.length > 0">
+    <ion-list-header>
+      <h1>Low priority</h1>
+    </ion-list-header>
+    <ion-item *ngFor="let task of lowPriorityList | async">
+    <h2>{{task.title}}</h2>
+    <p> 
+      {{task.resume}}
+    </p>
+    </ion-item>
+  </ion-list>
+
   <ion-fab right bottom>
     <button ion-fab (click)="goToTaskPage()">
       <ion-icon name="add"></ion-icon>
